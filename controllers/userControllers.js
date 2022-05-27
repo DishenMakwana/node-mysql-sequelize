@@ -14,14 +14,8 @@ const {
 const { catchAsync } = require('../utils/catchAsync');
 const { BRAND, MODEL, MODELS, BRANDS } = require('../utils/constant');
 const {
-  findSingleUserAddress,
-  createAddress,
-} = require('../dao/useraddress.dao');
-const {
   transformAddressWithPincode,
 } = require('../transformers/addressTransformers');
-const { findBrandById } = require('../dao/brand.dao');
-const { findModelById } = require('../dao/model.dao');
 
 const getUsers = catchAsync(async (req, res) => {
   let page = parseInt(req.query.page) || 0;

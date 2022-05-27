@@ -2,11 +2,6 @@ const { Op } = require('sequelize');
 const UserRole = require('../models/user_role');
 const User = require('../models/user');
 const Role = require('../models/role');
-const Patient = require('../models/patient');
-const Pincode = require('../models/pincode');
-const City = require('../models/city');
-const State = require('../models/state');
-const Country = require('../models/country');
 const {
   PATIENT,
   MODEL,
@@ -15,39 +10,11 @@ const {
   CUSTOM_PRICE,
   DEFAULT_PRICE,
 } = require('../utils/constant');
-const Address = require('../models/address');
-const Userwise_Pricing = require('../models/userwise_pricing');
-const Model_Type = require('../models/model_type');
-const Brand = require('../models/brand');
-const { findBrandById } = require('./brand.dao');
-const { findModelById } = require('./model.dao');
-const Patient_Attachment = require('../models/patient_attachment');
 const Role_Permission = require('../models/role_permission');
 const Permission = require('../models/permission');
 
 User.hasOne(UserRole, { foreignKey: 'user_id' });
 UserRole.belongsTo(User, { foreignKey: 'user_id' });
-
-User.hasMany(Patient, { foreignKey: 'user_id' });
-Patient.belongsTo(User, { foreignKey: 'user_id' });
-
-Pincode.hasOne(City, { foreignKey: 'city_id' });
-City.belongsTo(Pincode, { foreignKey: 'city_id' });
-
-City.hasOne(State, { foreignKey: 'state_id' });
-State.belongsTo(City, { foreignKey: 'state_id' });
-
-State.hasOne(Country, { foreignKey: 'country_id' });
-Country.belongsTo(State, { foreignKey: 'country_id' });
-
-Address.hasOne(Pincode, { foreignKey: 'pincode_id' });
-Pincode.belongsTo(Address, { foreignKey: 'pincode_id' });
-
-User.hasMany(Userwise_Pricing, { foreignKey: 'user_id' });
-Userwise_Pricing.belongsTo(User, { foreignKey: 'user_id' });
-
-Patient.hasMany(Patient_Attachment, { foreignKey: 'patient_id' });
-Patient_Attachment.belongsTo(Patient, { foreignKey: 'patient_id' });
 
 const createUser = async (result, password, payment) => {
   return User.create({

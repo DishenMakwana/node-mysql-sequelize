@@ -23,34 +23,14 @@ const {
   updateAdmin,
   getAdminById,
 } = require('../dao/user.dao');
-const {
-  createAddress,
-  updateUserAddress,
-  findSingleUserAddress,
-} = require('../dao/useraddress.dao');
 const { sendMail } = require('../helper/mail');
 const { sendMessage } = require('../helper/helpers');
 const { messages } = require('../utils/messages');
 const { statusCodes } = require('../utils/statusCodes');
 const { catchAsync } = require('../utils/catchAsync');
 const { USER_ADMIN, BRAND, MODEL, CUSTOM_PRICE } = require('../utils/constant');
-const {
-  addConfigData,
-  getDataForAllOrders,
-  findConfig,
-  findConfigById,
-  updateConfigData,
-  deleteConfigData,
-} = require('../dao/order.dao');
 const { transformOrderList } = require('../transformers/orderTransformers');
 const { transformUserList } = require('../transformers/userTransformers');
-const {
-  createOrdersExcel,
-} = require('../transformers/excel/create_orders.excel');
-const {
-  createUsersExcel,
-} = require('../transformers/excel/create_users.excel');
-const { getConfigs, getAllConfigs } = require('../dao/config.dao');
 
 const blockUnblockUsers = catchAsync(async (req, res) => {
   const userExists = await findUserById(req.params.id);
@@ -94,8 +74,6 @@ const blockUnblockUsers = catchAsync(async (req, res) => {
     res
   );
 });
-
-
 
 const addConfig = catchAsync(async (req, res) => {
   const configExists = await findConfig(req.body.type);
@@ -325,16 +303,7 @@ const getAdminDetails = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  createNewUser,
-  editUser,
   blockUnblockUsers,
-  addConfig,
-  getConfig,
-  getCSVForOrders,
-  getCSVForUsers,
-  updateConfig,
-  getAllConfig,
-  deleteConfig,
   createAdmin,
   editAdmin,
   getAdmins,

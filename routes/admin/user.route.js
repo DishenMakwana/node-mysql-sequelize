@@ -1,9 +1,10 @@
 const express = require('express');
-const { getUsers, getUserById } = require('../../controllers/userControllers');
 const {
+  getUsers,
+  getUserById,
   createNewUser,
   editUser,
-} = require('../../controllers/adminControllers');
+} = require('../../controllers/userControllers');
 const authenticate = require('../../middleware/validateToken');
 const { adminAuthorization } = require('../../middleware/authorization');
 const { validate } = require('express-validation');
