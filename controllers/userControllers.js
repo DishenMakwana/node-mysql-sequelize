@@ -7,10 +7,16 @@ const {
   getUser,
   getcustomuserpricing,
   getUserPaymentMethodDao,
+  findUserByEmail,
+  createUser,
+  add_user_role,
 } = require('../dao/user.dao');
 const { catchAsync } = require('../utils/catchAsync');
 const { BRAND, MODEL, MODELS, BRANDS } = require('../utils/constant');
-const { findSingleUserAddress } = require('../dao/useraddress.dao');
+const {
+  findSingleUserAddress,
+  createAddress,
+} = require('../dao/useraddress.dao');
 const {
   transformAddressWithPincode,
 } = require('../transformers/addressTransformers');
@@ -83,57 +89,102 @@ const getUserById = catchAsync(async (req, res) => {
   );
 });
 
-const getPricingByUserId = catchAsync(async (req, res) => {
-  const id = req.user.id;
+const createNewUser = catchAsync(async (req, res) => {
+  const email = req.body.email;
+  const userExists = await findUserByEmail(email);
 
-  let userpricings;
-  if (req.query.type === MODELS) {
-    userpricings = await getuserpricings(id, MODEL);
-  } else if (req.query.type === BRANDS) {
-    userpricings = await getuserpricings(id, BRAND);
+  if (userExists) {
+    return sendMessage(
+      { code: statusCodes.IM_USED.code },
+      messages.ALREADY_REGISTERED,
+      statusCodes.IM_USED.code,
+      res
+    );
   }
 
-  if (!userpricings) {
+  var password = generator.generate({
+    length: 10,
+    numbers: true,
+  });
+
+  let passwordHash = await bcrypt.hash(password, Number(bcryptSalt));
+
+  // Creating user account
+  const registration = await createUser(
+    req.body,
+    passwordHash,
+    String(req.body.payment)
+  );
+
+  if (registration) {
+    const user = await findUserByEmail(email);
+    const user_id = user.id;
+
+    await add_user_role(user_id);
+
+    const subject = 'Registered on QuiteClear';
+    const logo = process.env.CDN_BASEURL + process.env.LOGO_NAME;
+
+    ejs.renderFile(
+      path.join(__dirname, '../', 'helper/email_templates/registration.ejs'),
+      {
+        name: req.body.name,
+        username: email,
+        password: password,
+        logo: logo,
+      },
+      function (err, data) {
+        if (err) {
+          console.error(err);
+        } else {
+          sendMail(email, subject, data);
+        }
+      }
+    );
+
+    return sendMessage(
+      { code: statusCodes.CREATED.code },
+      messages.REGISTRATION_SUCCESSFUL,
+      statusCodes.CREATED.code,
+      res
+    );
+  }
+
+  return sendMessage(
+    { code: statusCodes.INTERNAL_SERVER_ERROR.code },
+    messages.UNSUCCESSFUL,
+    statusCodes.INTERNAL_SERVER_ERROR.code,
+    res
+  );
+});
+
+const editUser = catchAsync(async (req, res) => {
+  const userExists = await findUserById(req.params.id);
+
+  if (!userExists) {
     return sendMessage(
       { code: statusCodes.NOT_FOUND.code },
-      messages.USERPRICING_NOT_FOUND,
+      messages.ACCOUNT_DOESNOT_EXISTS,
       statusCodes.NOT_FOUND.code,
       res
     );
   }
 
-  return sendMessage(
-    { code: statusCodes.OK.code, data: userpricings },
-    messages.USERPRICING_FOUND,
-    statusCodes.OK.code,
-    res
-  );
-});
+  const addressData = await findSingleUserAddress(req.params.id);
 
-const getUserPaymentMethod = catchAsync(async (req, res) => {
-  const id = req.user.id;
-  const mode = await getUserPaymentMethodDao(id);
-
-  if (mode.is_blocked) {
-    return sendMessage(
-      { code: statusCodes.FORBIDDEN.code },
-      messages.ACCESS_FORBIDDEN,
-      statusCodes.FORBIDDEN.code,
-      res
-    );
-  }
+  await updateUser(req.params.id, req.body);
 
   return sendMessage(
-    { code: statusCodes.OK.code, data: mode },
-    messages.USER_PAYMENT_METHOD_FOUND,
-    statusCodes.OK.code,
+    { code: statusCodes.CREATED.code },
+    messages.USER_EDITED,
+    statusCodes.CREATED.code,
     res
   );
 });
 
 module.exports = {
   getUsers,
-  getPricingByUserId,
   getUserById,
-  getUserPaymentMethod,
+  createNewUser,
+  editUser,
 };

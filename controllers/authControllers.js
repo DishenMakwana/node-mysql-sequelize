@@ -152,6 +152,7 @@ const changePassword = catchAsync(async (req, res) => {
     const token = await generateToken(userExists, {
       role_id: req.user.role_id,
     });
+
     await createTokenByUserId(userExists.id, token);
 
     return sendMessage(
