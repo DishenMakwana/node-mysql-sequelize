@@ -41,24 +41,6 @@ const loginHandler = catchAsync(async (req, res) => {
   let userExists = await findUserByEmail(email);
 
   if (userExists) {
-    if (!userExists.is_approved) {
-      return sendMessage(
-        { code: statusCodes.PROXY_AUTHENTICATION_REQUIRED.code },
-        messages.APPROVAL_PENDING,
-        statusCodes.PROXY_AUTHENTICATION_REQUIRED.code,
-        res
-      );
-    }
-
-    if (userExists.is_blocked) {
-      return sendMessage(
-        { code: statusCodes.FORBIDDEN.code },
-        messages.ACCESS_FORBIDDEN,
-        statusCodes.FORBIDDEN.code,
-        res
-      );
-    }
-
     let verifyPassword = await bcrypt.compare(password, userExists.password);
 
     if (verifyPassword) {

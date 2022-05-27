@@ -258,16 +258,7 @@ const getPatientAttachmentsDao = async (id) => {
 const findUserByEmail = async (email) => {
   return User.findOne({
     where: { email: email },
-    attributes: [
-      'id',
-      'name',
-      'email',
-      'password',
-      'mobile',
-      'is_approved',
-      'is_blocked',
-      'payment_method',
-    ],
+    attributes: ['id', 'name', 'email', 'password', 'mobile'],
     raw: true,
   });
 };
