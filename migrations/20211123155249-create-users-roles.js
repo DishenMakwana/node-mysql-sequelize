@@ -15,8 +15,8 @@ module.exports = {
           model: 'roles',
           key: 'id',
         },
-        // onUpdate: 'cascade',
-        // onDelete: 'cascade',
+        onUpdate: 'NO ACTION',
+        onDelete: 'NO ACTION',
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -24,8 +24,8 @@ module.exports = {
           model: 'users',
           key: 'id',
         },
-        // onUpdate: 'cascade',
-        // onDelete: 'cascade',
+        onUpdate: 'NO ACTION',
+        onDelete: 'NO ACTION',
       },
       createdAt: {
         allowNull: true,

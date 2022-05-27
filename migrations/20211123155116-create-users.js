@@ -22,16 +22,10 @@ module.exports = {
       mobile: {
         type: Sequelize.STRING,
       },
-      is_approved: {
-        type: Sequelize.BOOLEAN,
-      },
-      payment_method: {
-        type: Sequelize.ENUM,
-        values: ['online', 'offline', 'not_define'],
-        defaultValue: 'not_define',
-      },
-      is_blocked: {
-        type: Sequelize.BOOLEAN,
+      deletedAt: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: null,
       },
       createdAt: {
         allowNull: true,
