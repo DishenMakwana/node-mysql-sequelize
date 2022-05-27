@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<style>
+    .order_table tbody tr:nth-child(2n) {
+        background-color: rgb(242, 241, 241);
+        border: 1px solid black
+    }
+
+    .order_table tbody tr td:nth-child(n) {
+        border-left: 1px solid black;
+    }
+
+    .order_table tr:nth-child(2n) {
+        width: 80%;
+    }
+
+    .order_table tr:nth-child(2n+1) {
+        width: 20%;
+        border: 1px solid black
+    }
+
+    td {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    th {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .order_table thead {
+        text-align: center;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .invoice_main {
+        width: 900px;
+        margin: auto;
+        margin-top: 50px;
+    }
+
+    .invoice_header_text {
+        text-align: center;
+    }
+
+    .invoice_logo {
+        display: -webkit-flex;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .invoice_logo_content {
+        width: 50%;
+        margin-top: 30px;
+    }
+
+    .patient_info_main {
+        width: 50%;
+        text-align: center;
+    }
+
+    .patient_info_main_content {
+        margin-top: 30px;
+    }
+
+    .patient_info_main_content_table {
+        text-align: left;
+    }
+
+    .billing_info_main {
+        margin-top: 35px;
+        margin-bottom: 35px;
+    }
+
+    .billing_info_main_table {
+        width: 100%;
+        text-align: left;
+    }
+
+    .billing_info_main_table thead {
+        background-color: #ccc;
+        color: black;
+        font-size: 20px;
+        padding-left: 15px;
+        ;
+        border: 1px solid black;
+        font-weight: 700;
+    }
+
+    .billing_info_main_table thead tr td {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .billing_info_content {
+        width: 100%;
+        text-align: left;
+    }
+
+    .billing_info_content tr {
+        border: 1px solid black
+    }
+
+    .billing_info_content tr td {
+        border: 1px solid black;
+    }
+
+    .order_table_div {
+        margin-top: 50px;
+        box-shadow: 0 0 10px #ccc;
+    }
+
+    .order_table {
+        width: 100%;
+        border: 1px solid black
+    }
+
+    .order_table thead {
+        background-color: #ccc;
+        color: black;
+        font-size: 20px;
+        padding-left: 15px;
+        border: 1px solid black;
+        font-weight: 700;
+    }
+
+    .order_table thead tr td {
+        border: 1px solid black
+    }
+
+    .special_notes_div {
+        margin-top: 20px;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-between;
+    }
+
+    .special_notes_div_inside {
+        width: 50%;
+    }
+
+    .special_notes_div_inside table {
+        width: 100%;
+    }
+
+    .special_notes_div_inside table thead {
+        background-color: #ccc;
+        color: black;
+        font-size: 16px;
+        padding-left: 15px;
+        ;
+        border: 1px solid black;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .special_notes_div_inside table thead tr td {
+        border: 1px solid black
+    }
+
+    .special_notes_div_inside tbody {
+        border: 1px solid black;
+        min-height: 100px
+    }
+
+    .costing_div {
+        width: 40%;
+        text-align: center;
+        margin-left: 10%;
+    }
+
+    .costing_div table {
+        width: 100%;
+        border: 1px solid black;
+        max-width: 400px;
+    }
+
+    .costing_div table tr {
+        border: 1px solid black
+    }
+
+    .costing_div table {
+        border: 1px solid black;
+        text-align: right;
+    }
+
+    .align_right {
+        text-align: right;
+    }
+
+    .align_left {
+        text-align: left;
+    }
+
+
+    .costing_div_table_title {
+        border: 1px solid black;
+        /* text-align: left; */
+    }
+
+    .costing_div_table_data {
+        border: 1px solid black;
+        width: 197px;
+        /* text-align: right; */
+    }
+
+    .bottom_text {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .bottom_text_for_thanks {
+        text-align: center;
+        margin-top: 2px;
+        font-weight: 900;
+    }
+
+    .bottom_text_for_query {
+        text-align: center;
+        margin-top: 2px;
+    }
+
+    .bottom_about_text {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="invoice_main">
+        <h1 class="invoice_header_text">
+            Invoice
+        </h1>
+        <div class="invoice_logo">
+            <div class="invoice_logo_content">
+                <h4>
+                    QuiteClear
+                </h4>
+                <p>Third in Revolution.</p>
+                <img src="https://static.wixstatic.com/media/b04d6f_3fb82d6014524759b25559505fa6a4b1~mv2.png/v1/fill/w_340,h_230,al_c,usm_0.66_1.00_0.01,enc_auto/thirdinrevfinal.png"
+                    style="width : 48% ; height : 44%">
+            </div>
+            <div class="patient_info_main">
+                <div class="patient_info_main_content">
+                    <table class="patient_info_main_content_table">
+                        <tr>
+                            <th>Patient Name : </th>
+                            <td>
+                                <%= orderData.patient.name %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Order Date : </th>
+                            <td>
+                                <%= orderData.ordered_on %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Delivery Date : </th>
+                            <td>
+                                <%= orderData.delivered_on %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Payment Mode : </th>
+                            <td>
+                                <%= orderData.invoice.payment_mode %>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="billing_info_main">
+                    <table class="billing_info_main_table">
+                        <thead>
+                            <tr>
+                                <td>Bill To</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table class="billing_info_content">
+                        <tr>
+                            <th>Name</th>
+                            <td>
+                                <%= orderData.user.name %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Delivering Address</th>
+                            <td>
+                                <%= orderData.address_history.address_line_1 %>, <%=
+                                        orderData.address_history.address_line_2 %>, <%=
+                                            orderData.address_history.landmark %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>
+                                <%= orderData.address_history.pincode.city.name %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ZIP Code</th>
+                            <td>
+                                <%= orderData.address_history.pincode.pincode %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>State</th>
+                            <td>
+                                <%= orderData.address_history.pincode.city.state.name %>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="order_table_div">
+            <table class="order_table">
+                <thead>
+                    <tr>
+                        <td>Description</td>
+                        <td>Units</td>
+                        <td>Base Price [&#8377;]</td>
+                        <td>Amount [&#8377;]</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orderData.order_details.forEach(details=> { %>
+                        <% if(details.model_type !==null) {%>
+                            <tr>
+                                <td style="text-align: left;">Model - <%= details.model_type.name %> - <%=
+                                            details.prefix %> - [<%= details.min %>
+                                                -
+                                                <%= details.max %>]</td>
+                                <td style="text-align: right;">
+                                    <% var range=(details.max - details.min) + 1%>
+                                        <%= range %>
+                                </td>
+                                <td style="text-align: right;">
+                                    <%= details.price %>
+                                </td>
+                                <td style="text-align: right;">
+                                    <% var price=details.price * (range)%>
+                                        <%= price %>
+                                </td>
+                            </tr>
+                            <% } else { %>
+                                <tr>
+                                    <td style="text-align: left;">
+                                        <%= details.brand.name %> - <%= details.aligner_type.name %> -
+                                                <%= details.prefix %>
+                                                    - [<%= details.min %>
+                                                        -
+                                                        <%= details.max %>]
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <% var range=(details.max - details.min) + 1%>
+                                            <%= range %>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <%= details.price %>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <% var price=details.price * (range)%>
+                                            <%= price %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="special_notes_div">
+            <div class="special_notes_div_inside">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Special Notes and Instructions.</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="height: 100px;">
+                                <%= orderData.instructions %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="costing_div">
+                <div>
+                    <table>
+                        <tr>
+                            <td class="costing_div_table_title align_left">Subtotal</td>
+                            <td class="costing_div_table_data align_right">
+                                <%= orderData.amount %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="costing_div_table_title align_left">Shipping Cost</td>
+                            <td class="costing_div_table_data align_right">
+                                <%= orderData.shipping_cost %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="costing_div_table_title align_left">Taxes</td>
+                            <td class="costing_div_table_data align_right">
+                                <%= orderData.tax %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="costing_div_table_title align_left">Total</td>
+                            <td class="costing_div_table_data align_right">
+                                <%= orderData.total_amount %>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_text"></div>
+        <div class="bottom_text_for_thanks">
+            <p>Thank You for your Order.</p>
+        </div>
+        <div class="bottom_text_for_query">
+            <p>If you have any query related to this order please feel free to contact.</p>
+        </div>
+        <hr>
+        <div class="bottom_about_text">
+            <p>Phone No. +91 99099 73333, Email: business@thirdinrev.com, Website: www.thirdinrev.com</p>
+        </div>
+    </div>
+</body>
+
+</html>
