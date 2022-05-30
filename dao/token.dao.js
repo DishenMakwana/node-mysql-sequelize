@@ -9,10 +9,6 @@ const findTokenByUserId = async (userId) => {
   });
 };
 
-const updateTokenByUserId = async (userId, token) => {
-  return Token.update({ token: token }, { where: { user_id: userId } });
-};
-
 const createTokenByUserId = async (userId, token) => {
   return Token.create({
     user_id: userId,
@@ -34,7 +30,6 @@ const findTokenByToken = async (token) => {
 
 module.exports = {
   findTokenByUserId,
-  updateTokenByUserId,
   createTokenByUserId,
   findTokenByToken,
   removeTokesByUserId,
