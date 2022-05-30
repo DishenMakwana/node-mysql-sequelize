@@ -11,7 +11,7 @@ const {
   findUserByEmail,
   getAllAdmins,
   updateAdmin,
-  getAdminById,
+  getUser,
 } = require('../dao/user.dao');
 const { sendMail } = require('../helper/mail');
 const { sendMessage } = require('../helper/helpers');
@@ -124,7 +124,7 @@ const getAdmins = catchAsync(async (_req, res) => {
 });
 
 const getAdminDetailById = catchAsync(async (req, res) => {
-  let admin = await getAdminById(req.params.id);
+  let admin = await getUser(req.params.id);
 
   return sendMessage(
     { code: statusCodes.OK.code, data: admin },

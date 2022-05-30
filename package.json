@@ -1,5 +1,5 @@
 {
-  "name": "quite-clear",
+  "name": "boilerplate-node-express-mysql",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "jest": "^28.1.0",
     "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1",

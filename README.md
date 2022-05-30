@@ -1,13 +1,13 @@
 ## QuiteClear
 
-#### Features
+### Features
 - Create and Update User
 - Create and Update Admin
 - Login and Logout for SuperAdmin, Admin, User
 - Listing API for User and Admins
 - Authentication (Login/Signup)
 
-#### Tech Stack
+### Tech Stack
 
 - Javascript and ES+6
 - NodeJS
@@ -21,7 +21,7 @@
 - SonarQube
 - Jest For Testing
 
-#### Packages
+### Packages
 
 - express
 - mongoose (for managing mongoDB)
@@ -40,49 +40,49 @@
 
 ###First create database locally
 
-**create models and migration file using cmd**
+***create models and migration file using cmd***
 
 ```
 npx sequelize-cli model:generate --name <table_name> --attributes <column>:<Type>,id:Integer,name:string,value:Double,
 ```
 
-**Create new migration to modify any existing migration**
+***Create new migration to modify any existing migration***
 
 ```
 npx sequelize-cli migration:create --name modify_users_add_new_fields
 ```
 
-**For migration**
+***For migration***
 
 ```
 npm run migration
 ```
 
-**Seed data in database**
+***Seed data in database***
 
 ```
 npm run seed
 ```
 
-**Run server with nodemon**
+***Run server with nodemon***
 
 ```
 npm run dev
 ```
 
-**Generate new seeder**
+***Generate new seeder***
 
 ```
 npx sequelize-cli seed:generate --name <name>
 ```
 
-**Download sonarqube image**
+***Download sonarqube image***
 
 ```
-docker-compose -f docker-compose.sonar.yml up -d
+sudo docker-compose -f docker-compose.sonar.yml up -d
 ```
 
-**Run Sonarqube check**
+***Run Sonarqube check***
 
 ```
 npm run sonar
@@ -91,7 +91,7 @@ npm run sonar
 - You need to run the following command to start the SonarQube on port 9000.
 
 ```
-docker run -d
+sudo docker run -d
      --name sonarqube
      -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
      -p 9000:9000 sonarqube:latest
