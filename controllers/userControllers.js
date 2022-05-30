@@ -1,19 +1,23 @@
+var generator = require('generate-password');
+const bcrypt = require('bcryptjs');
+const path = require('path');
+var ejs = require('ejs');
+const bcryptSalt = process.env.BCRYPT_SALT;
+
 const { statusCodes } = require('../utils/statusCodes');
+const { sendMail } = require('../helper/mail');
 const { messages } = require('../utils/messages');
 const { sendMessage, sendMetaMessage } = require('../helper/helpers');
 const {
   allUsers,
   getUser,
-  getcustomuserpricing,
   findUserByEmail,
   createUser,
-  add_user_role,
+  addUserRole,
+  updateUser,
+  findUserById,
 } = require('../dao/user.dao');
 const { catchAsync } = require('../utils/catchAsync');
-const { BRAND, MODEL, MODELS, BRANDS } = require('../utils/constant');
-const {
-  transformAddressWithPincode,
-} = require('../transformers/addressTransformers');
 
 const getUsers = catchAsync(async (req, res) => {
   let page = parseInt(req.query.page) || 0;
@@ -53,26 +57,6 @@ const getUserById = catchAsync(async (req, res) => {
     );
   }
 
-  let userPricing = await getcustomuserpricing(req.params.id);
-
-  for (const userPrice of userPricing) {
-    let productName;
-
-    if (userPrice.productable_type === BRAND) {
-      productName = await findBrandById(userPrice.productable_id);
-    } else {
-      productName = await findModelById(userPrice.productable_id);
-    }
-
-    userPrice.productable_name = productName.name;
-  }
-
-  user.userwise_pricing = userPricing;
-
-  let addressData = await findSingleUserAddress(req.params.id);
-
-  user.address = transformAddressWithPincode(addressData);
-
   return sendMessage(
     { code: statusCodes.OK.code, data: user },
     messages.USER_FOUND,
@@ -102,17 +86,13 @@ const createNewUser = catchAsync(async (req, res) => {
   let passwordHash = await bcrypt.hash(password, Number(bcryptSalt));
 
   // Creating user account
-  const registration = await createUser(
-    req.body,
-    passwordHash,
-    String(req.body.payment)
-  );
+  const registration = await createUser(req.body, passwordHash);
 
   if (registration) {
     const user = await findUserByEmail(email);
     const user_id = user.id;
 
-    await add_user_role(user_id);
+    await addUserRole(user_id);
 
     const subject = 'Registered on QuiteClear';
     const logo = process.env.CDN_BASEURL + process.env.LOGO_NAME;
@@ -161,8 +141,6 @@ const editUser = catchAsync(async (req, res) => {
       res
     );
   }
-
-  const addressData = await findSingleUserAddress(req.params.id);
 
   await updateUser(req.params.id, req.body);
 

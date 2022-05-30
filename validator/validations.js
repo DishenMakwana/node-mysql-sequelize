@@ -48,19 +48,6 @@ const createUserValidation = {
       .length(10)
       .pattern(/^[0-9]+$/)
       .required(),
-    address_line_1: Joi.string(),
-    address_line_2: Joi.string(),
-    landmark: Joi.string(),
-    pincode_id: Joi.number().required(),
-    payment: Joi.number().required(),
-    gst_number: Joi.string().pattern(
-      /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/
-    ),
-    userwise_pricing: Joi.boolean().required(),
-    userwise_pricings: Joi.alternatives().conditional('userwise_pricing', {
-      is: true,
-      then: Joi.array().items(userwisePricingValidation),
-    }),
   }),
 };
 

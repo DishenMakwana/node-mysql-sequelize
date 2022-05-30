@@ -16,15 +16,12 @@ const Permission = require('../models/permission');
 User.hasOne(UserRole, { foreignKey: 'user_id' });
 UserRole.belongsTo(User, { foreignKey: 'user_id' });
 
-const createUser = async (result, password, payment) => {
+const createUser = async (result, password) => {
   return User.create({
     name: result.name,
     mobile: result.mobile,
     email: result.email,
     password: password,
-    gst_number: result.gst_number || null,
-    payment_method: payment,
-    is_approved: 1,
     createdAt: Date.now(),
     updatedAt: Date.now(),
   });
@@ -136,8 +133,8 @@ const updateUser = async (id, result) => {
   await User.update(
     {
       name: result.name,
+      email: result.email,
       mobile: result.mobile,
-      payment_method: String(result.payment),
     },
     {
       where: {
@@ -263,7 +260,7 @@ const findUserByEmail = async (email) => {
   });
 };
 
-const add_user_role = async (user_id) => {
+const addUserRole = async (user_id) => {
   await UserRole.create({ role_id: role.USER, user_id: user_id });
 };
 
@@ -365,15 +362,7 @@ const allUsers = async (page, size, term) => {
         },
       ],
     },
-    attributes: [
-      'id',
-      'name',
-      'email',
-      'mobile',
-      'payment_method',
-      'is_blocked',
-      'gst_number',
-    ],
+    attributes: ['id', 'name', 'email', 'mobile'],
     limit: size,
     offset: page * size,
     raw: true,
@@ -383,15 +372,7 @@ const allUsers = async (page, size, term) => {
 const getUser = async (id) => {
   return User.findOne({
     where: { id: id },
-    attributes: [
-      'id',
-      'name',
-      'email',
-      'mobile',
-      'payment_method',
-      'is_blocked',
-      'gst_number',
-    ],
+    attributes: ['id', 'name', 'email', 'mobile'],
     raw: true,
   });
 };
@@ -629,7 +610,7 @@ const getCustomerByIdForSMS = async (id) => {
 
 module.exports = {
   createUser,
-  add_user_role,
+  addUserRole,
   findUserByEmail,
   findUserById,
   assignAdmin,
