@@ -15,6 +15,7 @@
     "express": "^4.18.1",
     "express-validation": "^4.1.0",
     "generate-password": "^1.7.0",
+    "husky": "^8.0.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mime-types": "^2.1.35",
@@ -31,6 +32,7 @@
     "jest": "^28.1.0",
     "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.16",
+    "prettier": "^2.6.2",
     "sequelize-cli": "^6.4.1",
     "sonarqube-scanner": "^2.8.1",
     "supertest": "^6.2.3"
@@ -42,7 +44,8 @@
     "migration": "npx sequelize-cli db:migrate",
     "sonar": "node sonar-project.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "DISHEN MAKWANA",
