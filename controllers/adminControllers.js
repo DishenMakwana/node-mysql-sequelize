@@ -44,7 +44,7 @@ const createAdmin = catchAsync(async (req, res) => {
   let passwordHash = await bcrypt.hash(req.body.password, Number(bcryptSalt));
 
   // Creating user account
-  const registration = await createUser(req.body, passwordHash, null);
+  const registration = await createUser(req.body, passwordHash);
 
   if (registration) {
     const user = await findUserByEmail(email);
@@ -123,7 +123,7 @@ const getAdmins = catchAsync(async (_req, res) => {
   );
 });
 
-const getAdminDetails = catchAsync(async (req, res) => {
+const getAdminDetailById = catchAsync(async (req, res) => {
   let admin = await getAdminById(req.params.id);
 
   return sendMessage(
@@ -135,9 +135,8 @@ const getAdminDetails = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  blockUnblockUsers,
   createAdmin,
   editAdmin,
   getAdmins,
-  getAdminDetails,
+  getAdminDetailById,
 };

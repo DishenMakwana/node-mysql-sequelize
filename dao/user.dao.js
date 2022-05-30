@@ -568,7 +568,7 @@ const getAllAdmins = async () => {
     where: {
       id: userIdList,
     },
-    attributes: ['id', 'name', 'email', 'mobile', 'is_blocked'],
+    attributes: ['id', 'name', 'email', 'mobile'],
     raw: true,
   });
 };
@@ -577,6 +577,7 @@ const updateAdmin = async (id, userData, password) => {
   await User.update(
     {
       name: userData.name,
+      email: userData.email,
       mobile: userData.mobile,
       password: password,
     },
@@ -587,7 +588,7 @@ const updateAdmin = async (id, userData, password) => {
 const getAdminById = async (id) => {
   return User.findOne({
     where: { id: id },
-    attributes: ['id', 'name', 'email', 'mobile', 'is_blocked'],
+    attributes: ['id', 'name', 'email', 'mobile'],
     raw: true,
   });
 };

@@ -51,6 +51,23 @@ const createUserValidation = {
   }),
 };
 
+const createAdminValidation = {
+  body: Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string()
+      .lowercase()
+      .email({ minDomainSegments: 2, tlds: { allow: false } }),
+    mobile: Joi.string()
+      .length(10)
+      .pattern(/^[0-9]+$/)
+      .required(),
+    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    password_confirmation: Joi.string().pattern(
+      new RegExp('^[a-zA-Z0-9]{3,30}$')
+    ),
+  }),
+};
+
 const patientValidation = {
   body: Joi.object({
     name: Joi.required(),
@@ -283,4 +300,5 @@ module.exports = {
   namePriceValidation,
   subproductValidation,
   patientEditValidation,
+  createAdminValidation,
 };
