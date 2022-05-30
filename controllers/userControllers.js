@@ -3,10 +3,8 @@ const { messages } = require('../utils/messages');
 const { sendMessage, sendMetaMessage } = require('../helper/helpers');
 const {
   allUsers,
-  getuserpricings,
   getUser,
   getcustomuserpricing,
-  getUserPaymentMethodDao,
   findUserByEmail,
   createUser,
   add_user_role,

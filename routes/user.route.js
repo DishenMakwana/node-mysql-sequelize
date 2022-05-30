@@ -6,6 +6,7 @@ const {
   changePassword,
   forgotPassword,
   resetPassword,
+  logoutHandler,
 } = require('../controllers/authControllers');
 const authenticate = require('../middleware/validateToken');
 const {
@@ -16,6 +17,8 @@ const {
 const router = express.Router();
 
 router.post('/login', validate(loginValidation, {}, {}), loginHandler);
+
+router.post('/logout', authenticate, logoutHandler);
 
 router.post(
   '/change-password',

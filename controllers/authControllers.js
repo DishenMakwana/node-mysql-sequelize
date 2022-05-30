@@ -104,6 +104,17 @@ const loginHandler = catchAsync(async (req, res) => {
   );
 });
 
+const logoutHandler = catchAsync(async (req, res) => {
+  await removeTokesByUserId(req.user.id);
+
+  return sendMessage(
+    { code: statusCodes.OK.code },
+    messages.LOGOUT_SUCCESSFULLY,
+    statusCodes.OK.code,
+    res
+  );
+});
+
 const changePassword = catchAsync(async (req, res) => {
   const { old_password, new_password, new_password_confirmation } = req.body;
 
@@ -254,4 +265,5 @@ module.exports = {
   changePassword,
   forgotPassword,
   resetPassword,
+  logoutHandler,
 };
