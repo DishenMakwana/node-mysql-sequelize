@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "0ca30f46-57d2-47f2-85df-e989f531725d",
+		"name": "boilerplate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19497418"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    pm.environment.set('accessToken', pm.response.json().meta.token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"demo@gmail.com\",\r\n    \"password\" : \"123\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/login/",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/v1/logout",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    pm.environment.set('accessToken', pm.response.json().meta.token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"old_password\" : \"Admin@123\",\r\n    \"new_password\" : \"Admin@123\",\r\n    \"new_password_confirmation\":\"Admin@123\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/change-password",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    pm.environment.set('accessToken', pm.response.json().meta.token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"raza@gmail.com\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/forgot-password",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpc2hlbkBnbWFpbC5jb20iLCJpZCI6Miwicm9sZSI6eyJyb2xlX2lkIjozLCJ1c2VyX2lkIjoyfSwiaWF0IjoxNjQ4NTQ1ODk0LCJleHAiOjE2NDkxNTA2OTR9.DEmSpcBjVQDxZHyLHs7Y55qXtxV9A68QVYoyFYy82rE\",\r\n    \"password\": \"abc123\",\r\n    \"password_confirmation\":\"abc123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/reset-password",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Raza\",\n    \"email\":\"raza@gmail.com\",\n    \"mobile\":\"9998886661\",\n    \"password\":\"123\",\n    \"password_confirmation\":\"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/admin/sub-admin/",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"sub-admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Admin By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Raza\",\n    \"email\":\"raza@gmail.com\",\n    \"mobile\":\"9998886661\",\n    \"password\":\"123\",\n    \"password_confirmation\":\"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/admin/sub-admin/5",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"sub-admin",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admins by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/admin/sub-admin/",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"sub-admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/admin/sub-admin/5",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"sub-admin",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Dishen Makwana\",\n    \"email\" : \"dishenm@gmail.com\",\n    \"mobile\" : \"8758516876\"\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/admin/user/",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Raza Pathan\",\n    \"email\" : \"raza@gmail.com\",\n    \"mobile\" : \"8758516876\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/admin/user/4",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/admin/user/3",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/admin/user/",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

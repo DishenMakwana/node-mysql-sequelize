@@ -14,19 +14,6 @@ services:
     volumes:
       - db:/var/lib/mysql
 
-  phpmyadmin:
-    depends_on:
-      - mysqldb
-    image: phpmyadmin/phpmyadmin
-    container_name: phpadmin_container
-    environment:
-      PMA_HOST: mysqldb
-    links:
-      - mysqldb:mysqldb
-    ports:
-      - "8080:80"
-    restart: always
-
   app:
     depends_on:
       - mysqldb
