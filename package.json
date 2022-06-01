@@ -45,7 +45,7 @@
     "migration:reset": "npx sequelize-cli db:migrate:undo:all && npm run migration && npm run seed",
     "sonar": "node sonar-project.js",
     "test": "cross-env NODE_ENV=test jest --forceExit",
-    "pretest": "cross-env NODE_ENV=test PORT=5000 npm run migration:reset",
+    "pre-test": "cross-env NODE_ENV=test PORT=5000 npm run migration:reset",
     "coverage": "jest --coverage",
     "prepare": "husky install"
   },
