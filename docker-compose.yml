@@ -14,7 +14,7 @@ services:
     volumes:
       - db:/var/lib/mysql
 
-  app:
+  server:
     depends_on:
       - mysqldb
     build: ./
@@ -39,3 +39,7 @@ services:
 
 volumes: 
   db:
+
+networks:
+  internalnet:
+    driver: bridge
