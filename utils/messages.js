@@ -49,5 +49,6 @@ module.exports = {
     ADMIN_UPDATED: 'Sub-Admin updated successfully',
     ADMINS_FETCHED: 'Sub-Admins fetched successfully',
     ADMIN_FETCHED: 'Sub-Admin fetched successfully',
+    VALIDATION_FAILED: 'Validation Failed',
   },
 };

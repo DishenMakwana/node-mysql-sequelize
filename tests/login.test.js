@@ -15,7 +15,7 @@ afterAll(async () => {
   await new Promise((resolve) => setTimeout(() => resolve(), 500)); // avoid jest open handle error
 });
 
-describe('Post Endpoints', () => {
+describe('Login API TESTING', () => {
   it('Post /api/v1/login SUCCESS', async () => {
     const res = await request(app).post('/api/v1/login').send({
       email: admin_email,
@@ -81,10 +81,8 @@ describe('Post Endpoints', () => {
       name: 'John Doe',
     });
 
-    console.log(res.body);
-
     expect(res.body.success).toBe(false);
-    expect(res.body.message).toBe('Validation Failed');
+    expect(res.body.message).toBe(messages.VALIDATION_FAILED);
     expect(res.body.error.statusCode).toBe(statusCodes.BAD_REQUEST.code);
   });
 });
