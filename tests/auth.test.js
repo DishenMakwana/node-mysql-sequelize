@@ -65,4 +65,26 @@ describe('Post Endpoints', () => {
     expect(res.body.meta.code).toBe(statusCodes.BAD_REQUEST.code);
     expect(res.body.message).toBe(messages.ENTER_NECESSARY_FIELDS);
   });
+
+  it('Post /api/v1/login EMPTY EMAIL & PASSWORD', async () => {
+    const res = await request(app).post('/api/v1/login').send({});
+
+    expect(res.status).toBe(statusCodes.BAD_REQUEST.code);
+    expect(res.body.meta.code).toBe(statusCodes.BAD_REQUEST.code);
+    expect(res.body.message).toBe(messages.ENTER_NECESSARY_FIELDS);
+  });
+
+  it('Post /api/v1/login REQ WITH EXTRA DETAILS', async () => {
+    const res = await request(app).post('/api/v1/login').send({
+      email: admin_email,
+      password: admin_password,
+      name: 'John Doe',
+    });
+
+    console.log(res.body);
+
+    expect(res.body.success).toBe(false);
+    expect(res.body.message).toBe('Validation Failed');
+    expect(res.body.error.statusCode).toBe(statusCodes.BAD_REQUEST.code);
+  });
 });
