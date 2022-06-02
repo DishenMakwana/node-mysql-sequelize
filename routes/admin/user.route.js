@@ -4,6 +4,7 @@ const {
   getUserById,
   createNewUser,
   editUser,
+  deleteUser,
 } = require('../../controllers/userControllers');
 const authenticate = require('../../middleware/validateToken');
 const { adminAuthorization } = require('../../middleware/authorization');
@@ -52,6 +53,14 @@ router.put(
   validate(idValidation, {}, {}),
   validate(createUserValidation, {}, {}),
   editUser
+);
+
+router.delete(
+  '/:id',
+  authenticate,
+  can('user', 'delete'),
+  validate(idValidation, {}, {}),
+  deleteUser
 );
 
 module.exports = router;

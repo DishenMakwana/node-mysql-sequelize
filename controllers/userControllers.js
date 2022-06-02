@@ -16,6 +16,7 @@ const {
   addUserRole,
   updateUser,
   findUserById,
+  deleteUserDao,
 } = require('../dao/user.dao');
 const { catchAsync } = require('../utils/catchAsync');
 
@@ -152,9 +153,32 @@ const editUser = catchAsync(async (req, res) => {
   );
 });
 
+const deleteUser = catchAsync(async (req, res) => {
+  const userExists = await findUserById(req.params.id);
+
+  if (!userExists) {
+    return sendMessage(
+      { code: statusCodes.NOT_FOUND.code },
+      messages.ACCOUNT_DOESNOT_EXISTS,
+      statusCodes.NOT_FOUND.code,
+      res
+    );
+  }
+
+  await deleteUserDao(req.params.id);
+
+  return sendMessage(
+    { code: statusCodes.OK.code },
+    messages.USER_DELETED,
+    statusCodes.OK.code,
+    res
+  );
+});
+
 module.exports = {
   getUsers,
   getUserById,
   createNewUser,
   editUser,
+  deleteUser,
 };

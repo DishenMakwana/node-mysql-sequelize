@@ -42,6 +42,10 @@ const updateUser = async (id, result) => {
   );
 };
 
+const deleteUserDao = async (id) => {
+  return User.destroy({ where: { id: id } });
+};
+
 const findUserByEmail = async (email) => {
   return User.findOne({
     where: { email: email },
@@ -209,4 +213,5 @@ module.exports = {
   getAllAdmins,
   updateAdmin,
   getAdminById,
+  deleteUserDao,
 };

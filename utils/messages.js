@@ -12,6 +12,7 @@ module.exports = {
     ACCOUNT_DOESNOT_EXISTS: 'Account does not exists.',
     USER_FOUND: 'Users found.',
     USERS_LIST: 'Users list.',
+    USER_DELETED: 'User deleted.',
 
     //Custom User-Friendly Messages for ADMINs
     ACCOUNT_VALIDATION: 'Account validation successful.',
