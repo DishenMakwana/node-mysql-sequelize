@@ -24,6 +24,8 @@ describe('Login API TESTING', () => {
 
     expect(res.status).toBe(statusCodes.OK.code);
     expect(res.body.message).toBe(messages.LOGIN_SUCCESSFUL);
+    expect(res.body.meta.token).toBeDefined();
+    expect(res.body.data.userDetails).toBeDefined();
   });
 
   it('Post /api/v1/login WRONG PASSWORD', async () => {
