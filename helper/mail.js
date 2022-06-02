@@ -9,12 +9,13 @@ const sendMail = async (email, subject, body) => {
 
     transporter = nodemailer.createTransport({
       SES: ses,
+      secure: true,
     });
   } else if (process.env.NODE_ENV === 'development') {
     transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: process.env.MAIL_PORT,
-      // secure: false, // upgrade later with STARTTLS
+      secure: true, // upgrade later with STARTTLS
       auth: {
         user: process.env.MAIL_USERNAME,
         pass: process.env.MAIL_PASSWORD,
