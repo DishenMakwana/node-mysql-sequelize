@@ -96,3 +96,15 @@ sudo docker run -d
      -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
      -p 9000:9000 sonarqube:latest
 ```
+
+***Run Unit tests using JEST***
+
+```
+npm run test
+```
+
+- run specific testfile
+
+```
+npm run test -- <file_name>
+```
