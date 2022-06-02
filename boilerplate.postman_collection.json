@@ -25,6 +25,9 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -35,7 +38,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"demo@gmail.com\",\r\n    \"password\" : \"123\"\r\n}"
+							"raw": "{\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"123\"\r\n}"
 						},
 						"url": {
 							"raw": "{{baseurl}}/api/v1/login/",
@@ -376,6 +379,25 @@
 								"admin",
 								"user",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/admin/user/2",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"2"
 							]
 						}
 					},
