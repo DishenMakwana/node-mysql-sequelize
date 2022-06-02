@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const app = express();
 const { statusCodes } = require('./utils/statusCodes');
 const { handleError } = require('./middleware/errorHandler');
@@ -9,8 +10,13 @@ const Router = require('./routes/');
 
 require('dotenv').config();
 
+let corsOptions = {
+  origin: 'localhost:5000',
+};
+
 app.use(express.json());
-app.use(cors());
+app.use(helmet());
+app.use(cors(corsOptions));
 
 app.get('/', async (_req, res) => {
   res.send('hello world');
