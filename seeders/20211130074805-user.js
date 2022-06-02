@@ -27,6 +27,34 @@ module.exports = {
           password: adminPassword,
           mobile: '8758566854',
         },
+        {
+          id: 3,
+          name: 'Dishen',
+          email: 'dishen@gmail.com',
+          password: adminPassword,
+          mobile: '8758566854',
+        },
+        {
+          id: 4,
+          name: 'Darsh',
+          email: 'darsh@gmail.com',
+          password: adminPassword,
+          mobile: '8758566854',
+        },
+        {
+          id: 5,
+          name: 'Deep',
+          email: 'deep@gmail.com',
+          password: adminPassword,
+          mobile: '8758566854',
+        },
+        {
+          id: 6,
+          name: 'D',
+          email: 'd@gmail.com',
+          password: adminPassword,
+          mobile: '8758566854',
+        },
       ],
       {}
     );
