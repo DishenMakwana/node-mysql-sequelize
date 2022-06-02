@@ -30,7 +30,7 @@ describe('Logout API TESTING', () => {
   });
 
   it('Post /api/v1/logout SUCCESS', async () => {
-    const res = await await request(app)
+    const res = await request(app)
       .post('/api/v1/logout')
       .set('Authorization', `Bearer ${token}`);
 
@@ -39,7 +39,7 @@ describe('Logout API TESTING', () => {
   });
 
   it('Post /api/v1/logout FAILURE', async () => {
-    const res = await await request(app)
+    const res = await request(app)
       .post('/api/v1/logout')
       .set('Authorization', `Bearer ${old_token}`);
 
@@ -48,7 +48,7 @@ describe('Logout API TESTING', () => {
   });
 
   it('Post /api/v1/logout FAKE TOKEN', async () => {
-    const res = await await request(app)
+    const res = await request(app)
       .post('/api/v1/logout')
       .set('Authorization', `Bearer ${fake_token}`);
 
@@ -57,7 +57,7 @@ describe('Logout API TESTING', () => {
   });
 
   it('Post /api/v1/logout EMPTY TOKEN', async () => {
-    const res = await await request(app)
+    const res = await request(app)
       .post('/api/v1/logout')
       .set('Authorization', `Bearer `);
 
@@ -66,7 +66,7 @@ describe('Logout API TESTING', () => {
   });
 
   it('Post /api/v1/logout EMPTY HEADER', async () => {
-    const res = await await request(app)
+    const res = await request(app)
       .post('/api/v1/logout')
       .set('Authorization', '');
 
