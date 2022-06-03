@@ -90,7 +90,7 @@ describe('USERS API', () => {
 
   it('PUT /admin/user/:id SUCCESS', async () => {
     const res = await request(app)
-      .put('/admin/user/2')
+      .put('/admin/user/5')
       .set('Authorization', `Bearer ${token}`)
       .send({
         name: chance.name(),
@@ -118,7 +118,7 @@ describe('USERS API', () => {
 
   it('DELETE /admin/user/:id SUCCESS', async () => {
     const res = await request(app)
-      .delete('/admin/user/2')
+      .delete('/admin/user/6')
       .set('Authorization', `Bearer ${token}`);
 
     expect(res.status).toBe(statusCodes.OK.code);
@@ -133,6 +133,4 @@ describe('USERS API', () => {
     expect(res.status).toBe(statusCodes.NOT_FOUND.code);
     expect(res.body.message).toBe(messages.ACCOUNT_DOESNOT_EXISTS);
   });
-
-  
 });
