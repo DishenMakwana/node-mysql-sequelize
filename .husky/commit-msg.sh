@@ -3,7 +3,7 @@
 
 COMMIT_MSG=`cat $1`
 TEST=`head $INPUT_FILE`
-PATTERN="((ENH|CHG|DEP|REM|FIX|SEC): .{5}(.|\n)*|Merge)"
+PATTERN="((ENH|CHG|DEP|REM|FIX|SEC|ADD|UPD): .{5}(.|\n)*|Merge)"
 echo "Checking commit message:" $COMMIT_MSG
 
 if ![["$COMMIT_MSG" =~ $PATTERN]]; then
@@ -15,6 +15,9 @@ if ![["$COMMIT_MSG" =~ $PATTERN]]; then
 		REM: For now removed features.
 		FIX: For any bug fixes.
 		SEC: In case of vulnerabilities.
+		ADD: Added new files.
+		UPD: For updates to existing files.
+		RMV: For removed files.
 	Eg: ('Added: minimum five characters in message')"
   exit 1
 fi
