@@ -3,12 +3,7 @@ const UserRole = require('../models/user_role');
 const User = require('../models/user');
 const Role = require('../models/role');
 const {
-  PATIENT,
-  MODEL,
-  BRAND,
   role,
-  CUSTOM_PRICE,
-  DEFAULT_PRICE,
 } = require('../utils/constant');
 const Role_Permission = require('../models/role_permission');
 const Permission = require('../models/permission');

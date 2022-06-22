@@ -1,4 +1,3 @@
-var generator = require('generate-password');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 var ejs = require('ejs');
